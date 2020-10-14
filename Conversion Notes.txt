@@ -1,0 +1,90 @@
+StorageVault Upgrade Notes:
+
+1) Add Aliases to Objects for:
+	Company
+	Employee
+	GL Account
+	Location
+	Vendor
+
+1) Add Aliases to Classes for:
+	Company
+	Employee
+	GL Account
+	Location
+	Vendor
+
+3) Add Aliases to Properties for:
+	Company Name
+	Full Name
+	First Name
+	Last Name
+	M-Files user (should be plural)
+	Email
+	Role (should be plural)
+	Company (should be plural)
+	Account Name (*** Why isn't this automatically calculated base on Account Number and Description?)
+	Account Number
+	Description (should be Account Description)
+	Location Name
+	Address
+	City
+	Province/State
+	Phone
+	Regional Manager (should be plural)
+	Sr. Regional Manager (should be plural)
+	Asset Manager (should be plural)
+	Director (should be plural)
+	VP (should be plural)
+	Office Supplies Approver (should be plural)
+	Vendor Name
+	Postal Code
+	FAX
+	Notes
+	Recurring
+	Default account (should be Default Account)
+
+4) Add Properties that are "Choose from list" rather than "Choose from list (multi-select)" for:
+	Regional Manager
+	Sr Regional Manager
+	Director
+	VP
+	Asset Manager
+	M-Files User
+	Role
+	Company
+
+5) Update field names for fields that are "Choose from list (multi-select)" [Make Plural] for:
+	Regional Manager
+	Sr Regional Manager
+	Director
+	VP
+	Asset Manager
+	M-Files user
+	Role
+	Company
+
+6) Add singular fields and remove plural to Locations for:
+	Regional Manager
+	Sr Regional Manager
+	Director
+	VP
+	Asset Manager
+
+7) Add singular fields and remove plural to Employee for:
+	M-Files user
+
+8) Run VbScript Module to Fix Locations, moving plural property Values to singular Values
+
+8) Add fields to Company Class for:
+	Legal Workflows (CFL Multi on Workflows)
+	Book Keepers (CFL  on User groups)
+
+9) Add fields to Location Class for:
+	Only Final Approval (Boolean)
+
+10) Add fields to Vendor Class for:
+	Supplies Vendor (Boolean)
+	Is Vendor (Boolean)
+	*** Updated exists in testing vault, but does not need to be in production.
+
