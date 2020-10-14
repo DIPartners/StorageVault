@@ -244,8 +244,8 @@ Sub ReplaceFieldHKo(ClassName, FieldList)
     If Not FoundAdmin Is Nothing Then
         Dim OrigID, RepID, PropDef, i
         For i = 0 to ubound(FieldList)
-            OrigID = Vault.PropertyDefOperations.GetPropertyDefIDByAlias(getAlias("vProperty.", FieldList(i, 0)))
-            RepID = Vault.PropertyDefOperations.GetPropertyDefIDByAlias(getAlias("vProperty.", FieldList(i, 1)))
+            OrigID = Vault.PropertyDefOperations.GetPropertyDefIDByAlias(getAlias("vProperty", FieldList(i, 0)))
+            RepID = Vault.PropertyDefOperations.GetPropertyDefIDByAlias(getAlias("vProperty", FieldList(i, 1)))
             For Each PropDef In FoundAdmin.AssociatedPropertyDefs
                 If PropDef.PropertyDef = OrigID Then
                     PropDef.PropertyDef = RepID
@@ -256,15 +256,15 @@ Sub ReplaceFieldHKo(ClassName, FieldList)
         Vault.ClassOperations.UpdateObjectClassAdmin FoundAdmin
 
         Dim ObjVers, ObjVer, Vals, CheckedOutObj, FieldVal
-        Set ObjVers = SearchForObjects(getAlias("vClass.", ClassName), Array( -1 ) )
+        Set ObjVers = SearchForObjects(getAlias("vClass", ClassName), Array( -1 ) )
         if Not (ObjVers is Nothing) Then
             For Each ObjVer In ObjVers
                 Set Vals = Vault.ObjectPropertyOperations.GetProperties(ObjVer.ObjVer)
                 Set CheckedOutObj = Vault.ObjectOperations.Checkout(ObjVer.ObjVer.ObjID)
                 For i = 0 to ubound(FieldList)
-                    Set FieldVal = Vals.SearchForPropertyByAlias(Vault, getAlias("vProperty.", FieldList(i, 0)), True)
+                    Set FieldVal = Vals.SearchForPropertyByAlias(Vault, getAlias("vProperty", FieldList(i, 0)), True)
                     if Not (FieldVal is Nothing) Then
-                        FieldVal.PropertyDef = Vault.PropertyDefOperations.GetPropertyDefIDByAlias(getAlias("vProperty.", FieldList(i, 1)))
+                        FieldVal.PropertyDef = Vault.PropertyDefOperations.GetPropertyDefIDByAlias(getAlias("vProperty", FieldList(i, 1)))
                         FieldVal.TypedValue.SetValue MFDatatypeLookup, FieldVal.TypedValue.GetValueAsLookup()
                         Vault.ObjectPropertyOperations.SetProperty CheckedOutObj.ObjVer, FieldVal
                         Vault.ObjectPropertyOperations.RemoveProperty CheckedOutObj.ObjVer, GetPropertyID(SrcAlias)                    
@@ -282,5 +282,5 @@ Sub ReplaceFieldHKo(ClassName, FieldList)
 End Sub
 
 Function getAlias(Selector, findName)
-    getAlias = Selector & Replace(Replace(Replace(Replace(findName, "/", ""), " ", ""), ".", ""), "-", "")
+    getAlias = Selector & "." & Replace(Replace(Replace(Replace(findName, "/", ""), " ", ""), ".", ""), "-", "")
 end Function
